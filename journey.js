@@ -4,6 +4,7 @@
     hero: 'assets/stridewear-hero.jpg',
     product: 'assets/stridewear-product.png',
     ads: 'assets/stridewear-ads.jpg',
+    acceline: 'assets/acceline-hero.jpg',
     tik1: 'assets/tik1.mp4',
     tik2: 'assets/tik2.mp4',
     tikAd: 'assets/tickadvid.mp4',
@@ -25,6 +26,16 @@
     av3: 'assets/ig3-avatar.png',
     av4: 'assets/ig4-avatar.png'
   };
+  const IMG_ORIG = Object.assign({}, IMG);
+  function applyMediaBlobs(map) {
+    if (!map) return;
+    Object.keys(IMG_ORIG).forEach(key => {
+      const orig = IMG_ORIG[key];
+      if (map[orig]) IMG[key] = map[orig];
+    });
+  }
+  applyMediaBlobs(window.CM360Media);
+  window.addEventListener('cm360-media-ready', e => applyMediaBlobs(e.detail || window.CM360Media));
 
   const PRODUCT = {
     brand: 'StrideWear',
@@ -200,7 +211,7 @@
         <p class="toi-dek">The partnership will enable global brands to reach millions of users through native, AI-powered advertising experiences on OpenAI’s ChatGPT platform.</p>
         <p class="toi-byline">By TOI Business Desk | Mumbai | 12 Nov 2024, 11:30 AM IST</p>
         <figure class="toi-hero">
-          <img src="assets/acceline-hero.jpg" alt="Acceline Digital and ChatGPT partnership visual">
+          <img src="${IMG.acceline}" alt="Acceline Digital and ChatGPT partnership visual">
         </figure>
         <p>Mumbai: Acceline Digital, a leading global digital marketing and media solutions company, has announced a landmark partnership to manage media advertisements for major global brands on OpenAI’s ChatGPT platform.</p>
         <p>The collaboration will enable brands to engage with consumers through relevant, conversational and context-aware advertising, unlocking a new era of AI-driven brand experiences.</p>
