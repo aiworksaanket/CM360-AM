@@ -1,0 +1,15 @@
+{
+  "name": "cm360_am",
+  "version": "1.0.0",
+  "description": "",
+  "main": "journey.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ogl": "^1.0.11"
+  }
+}
