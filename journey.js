@@ -119,8 +119,7 @@
       <h2 class="jny-title">${title}</h2>
       <p class="jny-body">${explained ? c.body : 'Explore the experience inside the iPad.<br>The explanation stays outside.'}</p>
       <p class="jny-note ${explained ? 'is-on' : ''}"><strong>${c.noteTitle}</strong><span>${c.noteBody}</span></p>
-      ${explained ? '' : `<p class="jny-hint" data-hint><i aria-hidden="true"></i>${c.hint}</p>`}
-      <p class="jny-press">Press <b>→</b> to continue</p>`;
+      ${explained ? '' : `<p class="jny-hint" data-hint><i aria-hidden="true"></i>${c.hint}</p>`}`;
   }
 
   function browserBar(url, tabs) {
