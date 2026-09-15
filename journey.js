@@ -62,7 +62,7 @@
     3: {
       kicker: 'Touchpoint 01',
       headline: ['Display', 'Impression'],
-      body: 'Aritra sees the running-shoes advertisement while reading the news but does not interact with it.',
+      body: 'The user sees the running-shoes advertisement while reading the news but does not interact with it.',
       noteTitle: 'Display ad was served as an impression.',
       noteBody: 'No click occurred.',
       hint: 'Scroll the news page to find the ad'
@@ -70,7 +70,7 @@
     4: {
       kicker: 'Touchpoint 02',
       headline: ['Instagram'],
-      body: 'Aritra taps the sponsored StrideWear post and lands on the advertiser website. He looks, then leaves without buying.',
+      body: 'The user taps the sponsored StrideWear post and lands on the advertiser website. They look, then leave without buying.',
       noteTitle: 'Social ad was clicked and the advertiser site was visited.',
       noteBody: 'No purchase occurred.',
       hint: 'Scroll, then click the sponsored ad'
@@ -78,7 +78,7 @@
     5: {
       kicker: 'Touchpoint 03',
       headline: ['TikTok'],
-      body: 'Aritra clicked the ad, visited the advertiser website and added the shoes to his cart, but did not complete the purchase.',
+      body: 'The user clicked the ad, visited the advertiser website and added the shoes to their cart, but did not complete the purchase.',
       noteTitle: 'TikTok ad was clicked. The product was added to cart.',
       noteBody: 'Purchase did not occur.',
       hint: 'Use the arrows on the iPad to browse videos. Tap the StrideWear ad to visit the website.'
@@ -86,7 +86,7 @@
     6: {
       kicker: 'Touchpoint 04',
       headline: ['YouTube'],
-      body: 'Aritra saw the YouTube pre-roll but did not click it. Later, he directly visited the advertiser website and completed the purchase.',
+      body: 'The user saw the YouTube pre-roll but did not click it. Later, they directly visited the advertiser website and completed the purchase.',
       noteTitle: 'This is the final conversion.',
       noteBody: 'View, then a direct visit — not an ad click.',
       hint: 'Watch the ad, then open a new tab.'
@@ -117,7 +117,7 @@
     return `<div class="jny-count">0${scene - 2} / 05</div>
       <div class="jny-kicker">${c.kicker}</div>
       <h2 class="jny-title">${title}</h2>
-      <p class="jny-body">${explained ? c.body : 'Explore the experience inside the iPad.<br>The explanation stays outside.'}</p>
+      ${explained ? `<p class="jny-body">${c.body}</p>` : ''}
       <p class="jny-note ${explained ? 'is-on' : ''}"><strong>${c.noteTitle}</strong><span>${c.noteBody}</span></p>
       ${explained ? '' : `<p class="jny-hint" data-hint><i aria-hidden="true"></i>${c.hint}</p>`}`;
   }
@@ -254,6 +254,38 @@
           <ul><li>Lightweight</li><li>Cushioned</li><li>Durable</li></ul>
           <span class="shop">Shop Now →</span>
         </aside>
+      </div>
+      <div class="toi-sec"><span>Also in Business</span></div>
+      <div class="toi-related">
+        <article><em>Markets</em><h4>Sensex holds steady as IT and banking stocks trade mixed</h4></article>
+        <article><em>Startups</em><h4>Mumbai accelerator opens applications for its next AI cohort</h4></article>
+        <article><em>Economy</em><h4>Retail spending rises ahead of the festive season, survey finds</h4></article>
+        <article><em>Technology</em><h4>Cloud providers expand data centre capacity in western India</h4></article>
+      </div>
+      <article class="toi-story">
+        <p class="toi-cats"><span>Business</span><span>Advertising</span></p>
+        <h1>How conversational ads could change brand discovery</h1>
+        <p class="toi-dek">Analysts say the next wave of digital advertising will sit inside everyday tools rather than around them.</p>
+        <p>New Delhi: Media buyers are watching the ChatGPT advertising deal closely, calling it an early test of whether brands can appear in a chat without breaking the experience.</p>
+        <p>Several agencies said they are already briefing clients on how conversational placements might work alongside search, social and display. The emphasis, they added, is on useful answers rather than loud interruption.</p>
+        <p>Smaller advertisers are expected to wait for clearer measurement before committing budgets. Larger brands, meanwhile, are exploring limited pilots to understand tone, frequency and placement rules.</p>
+        <p>People familiar with the plans said reporting would likely cover viewability, brand safety and whether a message led to a later site visit. Exact formats are still being finalised.</p>
+        <p>For now, the industry view is cautious but interested. If the first campaigns hold attention without frustrating users, more advertisers are likely to follow in the next planning cycle.</p>
+      </article>
+      <div class="toi-sec"><span>Trending now</span></div>
+      <div class="toi-related">
+        <article><em>Cities</em><h4>Mumbai local services to run extra trains this weekend</h4></article>
+        <article><em>Sports</em><h4>India look to seal series with disciplined bowling display</h4></article>
+        <article><em>Lifestyle</em><h4>Why morning walks are making a comeback in metro cities</h4></article>
+        <article><em>Education</em><h4>Universities add short courses in digital marketing and AI</h4></article>
+        <article><em>World</em><h4>Global tech firms outline hiring plans for the next quarter</h4></article>
+      </div>
+      <div class="toi-sec"><span>From around the web</span></div>
+      <div class="toi-related">
+        <article><em>Explainers</em><h4>What shoppers want from festive offers this year</h4></article>
+        <article><em>Markets</em><h4>A short guide to reading company results like an analyst</h4></article>
+        <article><em>Work</em><h4>Office canteens quietly become the new networking rooms</h4></article>
+        <article><em>Tech</em><h4>Five apps commuters say they actually use every day</h4></article>
       </div>
     </div>`;
   }

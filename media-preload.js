@@ -4,6 +4,7 @@
   const IMAGES = [
     'backslide1final.png',
     'backslide2.png',
+    'slide2back.png',
     'backslide3.png',
     'backipadfinal.png',
     'newbackforslide8.png',
