@@ -1,5 +1,5 @@
 /* React Bits GlowCursor (JS + CSS), ported for this static deck. Depends on ogl. */
-import { Mesh, Program, Renderer, Triangle } from 'ogl';
+import { Mesh, Program, Renderer, Triangle } from './vendor/ogl/index.js';
 
 const MAX_POINTS = 64;
 
@@ -124,8 +124,8 @@ const hexToRgb = hex => {
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 const DEFAULTS = {
-  color: '#64748b',
-  secondaryColor: '#94a3b8',
+  color: '#8ec8ff',
+  secondaryColor: '#cfe8ff',
   trailLength: 14,
   trailWidth: 5,
   trailTaper: 0.8,
@@ -318,8 +318,8 @@ export function mountGlowCursor(container, options = {}) {
 const host = document.getElementById('glowCursor');
 if (host) {
   mountGlowCursor(host, {
-    color: '#64748b',
-    secondaryColor: '#94a3b8',
+    color: '#8ec8ff',
+    secondaryColor: '#cfe8ff',
     trailLength: 14,
     trailWidth: 5,
     trailTaper: 0.8,

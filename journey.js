@@ -62,7 +62,7 @@
     3: {
       kicker: 'Touchpoint 01',
       headline: ['Display', 'Impression'],
-      body: 'The user sees the running-shoes advertisement while reading the news but does not interact with it.',
+      body: 'The user sees the running-shoes Ad while reading the news but does not interact with it.',
       noteTitle: 'Display ad was served as an impression.',
       noteBody: 'No click occurred.',
       hint: 'Scroll the news page to find the ad'
@@ -94,39 +94,51 @@
   };
 
   const store = { size: '9', cart: 0, purchased: false, ytView: 'home', ytAdStarted: false, ytAdDone: false, ytShopOpen: false, ytHomeScroll: 0, igScroll: 0, ttScroll: 0, ttIndex: 0 };
-  const gate = { 3: { needed: 'seen', done: false, explained: false },
-    4: { needed: 'clicked', done: false, explained: false },
-    5: { needed: 'carted', done: false, explained: false },
-    6: { needed: 'purchased', done: false, explained: false } };
+  const gate = { 3: { needed: 'seen', done: false },
+    4: { needed: 'clicked', done: false },
+    5: { needed: 'carted', done: false },
+    6: { needed: 'purchased', done: false } };
 
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return [...(root || document).querySelectorAll(sel)]; }
 
   function leftRail(activeIdx) {
-    return `<div class="jny-brand">CM360 Attribution Models</div>
-      <p class="jny-lede">One customer.<br>Multiple touchpoints.<br>One purchase.</p>
+    return `<p class="jny-lede">One customer.<br>Multiple touchpoints.<br>One purchase.</p>
       <ol class="jny-steps">${STEPS.map((s, i) => {
         const state = i < activeIdx ? 'is-done' : (i === activeIdx ? 'is-now' : '');
         return `<li class="${state}"><span>${String(i + 1).padStart(2, '0')}</span>${s.name}</li>`;
       }).join('')}</ol>`;
   }
 
-  function rightPanel(scene, explained) {
+  function rightPanel(scene) {
     const c = COPY[scene];
     const title = (c.headline || []).map((line, i) => i ? `<span>${line}</span>` : line).join('');
     return `<div class="jny-count">0${scene - 2} / 05</div>
       <div class="jny-kicker">${c.kicker}</div>
       <h2 class="jny-title">${title}</h2>
-      ${explained ? `<p class="jny-body">${c.body}</p>` : ''}
-      <p class="jny-note ${explained ? 'is-on' : ''}"><strong>${c.noteTitle}</strong><span>${c.noteBody}</span></p>
-      ${explained ? '' : `<p class="jny-hint" data-hint><i aria-hidden="true"></i>${c.hint}</p>`}`;
+      <p class="jny-body">${c.body}</p>
+      <p class="jny-note is-on"><strong>${c.noteTitle}</strong><span>${c.noteBody}</span></p>
+      <p class="jny-hint" data-hint><i aria-hidden="true"></i>${c.hint}</p>`;
   }
 
-  function browserBar(url, tabs) {
+  function pickClock() {
+    const hour24 = 8 + Math.floor(Math.random() * 12);
+    const mins = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+    const hour12 = ((hour24 + 11) % 12) + 1;
+    const ampm = hour24 >= 12 ? 'PM' : 'AM';
+    return hour12 + ':' + mins + ' ' + ampm;
+  }
+  const STAMP_TOI = { time: pickClock(), date: 'Wed 16 Sep' };
+  const STAMP_IG = { time: pickClock(), date: 'Wed 16 Sep' };
+  const STAMP_NIGHT = { time: '10:00 PM', date: 'Thu 17 Sep' };
+
+  function browserBar(url, tabs, stamp) {
     const list = tabs || [{ id: 'main', label: url.split('/')[0], on: true }];
     const tabHtml = list.map(t =>
       `<button type="button" class="jb-tab ${t.on ? 'is-on' : ''}" data-tab="${t.id}">${t.label}</button>`).join('');
-    return `<div class="ipad-status"><span>9:41</span><span>Tue 12 Nov</span><span>100%</span></div>
+    const time = (stamp && stamp.time) || '9:41';
+    const date = (stamp && stamp.date) || 'Tue 12 Nov';
+    return `<div class="ipad-status"><span>${time}</span><span>${date}</span><span>100%</span></div>
       <div class="jb">
       <div class="jb-tabs${list.length > 1 ? ' is-multi' : ''}">${tabHtml}</div>
       <div class="jb-row">
@@ -151,7 +163,8 @@
       { src: IMG.ads, pos: '82% 18%' },
       { src: IMG.ads, pos: '82% 82%' }
     ];
-    return `<div class="sw ipad-scroll" data-product>
+    return `<div class="sw-wrap">
+      <div class="sw ipad-scroll" data-product>
       <header class="sw-top">
         <div class="sw-brand"><b>▲ StrideWear</b><small>Move a brighter tomorrow</small></div>
         <nav class="sw-nav" aria-label="StrideWear">
@@ -186,15 +199,18 @@
         <p>Deliver to Mumbai 400001 · UPI / Card</p>
         <button type="button" class="sw-btn" data-pay>Place order · ${price}</button>
       </div>
-      <div class="sw-done" hidden>
-        <h4>Order Confirmed</h4>
-        <p>Order #SW-48219 · ${PRODUCT.name} · Size ${store.size}</p>
-        <p>Paid ${price}. Arriving tomorrow.</p>
-      </div>
       <section class="sw-details">
         <h4>Product details</h4>
         <p>${PRODUCT.headline}. ${PRODUCT.benefits.join(' · ')}.</p>
       </section>
+      </div>
+      <div class="sw-pop" hidden data-order-pop>
+        <div class="sw-pop-card" data-order-card>
+          <span class="sw-pop-check" aria-hidden="true">✓</span>
+          <h4>Order placed</h4>
+          <p>Order #SW-48219 · ${PRODUCT.name} · Size ${store.size}</p>
+        </div>
+      </div>
     </div>`;
   }
 
@@ -208,7 +224,7 @@
         <p class="toi-cats"><span>Business</span><span>Technology</span></p>
         <h1>Acceline Digital bags the deal for media advertisements for all big brands on ChatGPT AI platform</h1>
         <p class="toi-dek">The partnership will enable global brands to reach millions of users through native, AI-powered advertising experiences on OpenAI’s ChatGPT platform.</p>
-        <p class="toi-byline">By TOI Business Desk | Mumbai | 12 Nov 2024, 11:30 AM IST</p>
+        <p class="toi-byline">By TOI Business Desk | Mumbai | 16 Sep 2026, ${STAMP_TOI.time} IST</p>
         <figure class="toi-hero">
           <img src="${IMG.acceline}" alt="Acceline Digital and ChatGPT partnership visual">
         </figure>
@@ -250,7 +266,6 @@
           <h5>Run Further.<br>Live Better.</h5>
           <img src="${IMG.hero}" alt="StrideWear display advertisement">
           <p class="swad-line">${PRODUCT.headline}</p>
-          <p class="swad-price"><b>${PRODUCT.price}</b> <s>${PRODUCT.mrp}</s></p>
           <ul><li>Lightweight</li><li>Cushioned</li><li>Durable</li></ul>
           <span class="shop">Shop Now →</span>
         </aside>
@@ -336,11 +351,11 @@
   function igHTML() {
     const stories = [
       ['Your story', IMG.av4, 'you'],
-      ['arjun', IMG.av3, ''],
-      ['rahul', IMG.av2, ''],
-      ['rohan', IMG.av1, ''],
-      ['vikram', IMG.av4, ''],
-      ['aman', IMG.av2, '']
+      ['Swapnil', IMG.av3, ''],
+      ['abhijeet', IMG.av2, ''],
+      ['ankita', IMG.av1, ''],
+      ['Rebecca', IMG.av4, ''],
+      ['Aakif', IMG.av2, '']
     ];
     return `<div class="ig">
       <header class="ig-top">
@@ -355,19 +370,19 @@
           `<div class="ig-story ${extra}"><img src="${src}" alt=""><em>${n}</em></div>`
         ).join('')}</div>
         ${igPost({
-          user: 'rohan.kapoor', av: IMG.av1, loc: 'Manali, Himachal Pradesh',
+          user: 'Saaanket', av: IMG.av1, loc: 'Manali, Himachal Pradesh',
           img: IMG.ig1, alt: 'Hiker overlooking a mountain lake in Manali',
           likes: '8,421',
           caption: 'Somewhere between the mountains and my thoughts… found a little more peace today.',
           tags: '#Manali #Mountains #TravelDiaries',
           comments: [
-            { user: 'aditya.singh', text: 'Great shot.' },
-            { user: 'neel.thakkar', text: 'Need to visit this place.' }
+            { user: 'Preetsinghny', text: 'Great shot.' },
+            { user: 'Harmeet.shainki', text: 'Need to visit this place.' }
           ],
           time: '2 days ago'
         })}
         ${igPost({
-          user: 'rahul.verma', av: IMG.av2, loc: 'Mumbai, Maharashtra',
+          user: 'Thoolhimanshu', av: IMG.av2, loc: 'Mumbai, Maharashtra',
           img: IMG.ig2, alt: 'Avocado toast and cappuccino at a Mumbai cafe',
           likes: '12,904',
           caption: 'Good food = good mood. Simple meals, happier days.',
@@ -379,13 +394,13 @@
           time: '1 day ago'
         })}
         ${igPost({
-          user: 'arjun.mehta', av: IMG.av3, loc: 'Spiti Valley, Himachal Pradesh',
+          user: 'Calmak47', av: IMG.av3, loc: 'Spiti Valley, Himachal Pradesh',
           img: IMG.ig3, alt: 'Sunrise over snow peaks in Spiti Valley',
           likes: '5,683',
           caption: 'Some places just feel like home.',
           tags: '#Himalayas #NatureLovers #Spiti',
           comments: [
-            { user: 'rohan.desai', text: 'Unreal beauty.' }
+            { user: 'Zoheen_the_Mad_Girl', text: 'Unreal beauty.' }
           ],
           time: '1 day ago'
         })}
@@ -604,7 +619,7 @@
           </div>
         </div>
         <div class="ytp-cmt"><b>Comments</b><span>1.8K</span></div>
-        <p class="ytp-cmt-row"><b>rahul.verma</b> Anyone else waiting for the camera comparison?</p>
+        <p class="ytp-cmt-row"><b>Thoolhimanshu</b> Anyone else waiting for the camera comparison?</p>
         <p class="ytp-cmt-row"><b>aarti.studio</b> Worth it if you're coming from a 14 Pro.</p>
         <p class="ytp-rec-label">Recommended</p>
         <article class="ytp-rec">
@@ -641,7 +656,6 @@
     });
     const buy = $('[data-buynow]', root);
     const checkout = $('.sw-checkout', root);
-    const done = $('.sw-done', root);
     if (buy && allowPurchase) buy.addEventListener('click', () => {
       if (store.cart < 1) { store.cart = 1; }
       if (checkout) checkout.hidden = false;
@@ -650,16 +664,20 @@
     if (pay) pay.addEventListener('click', () => {
       store.purchased = true;
       if (checkout) checkout.hidden = true;
-      if (celebrate) {
-        if (done) done.hidden = true;
-      } else if (done) {
-        done.hidden = false;
-      }
+      const pop = $('[data-order-pop]', root);
+      const card = $('[data-order-card]', root);
+      if (pop) pop.hidden = false;
+      const slot = root.closest('.ipad-slot');
+      if (slot) slot.classList.add('is-order-pop');
       if (onPurchase) onPurchase();
       if (celebrate && window.Celebrate) {
-        const r = pay.getBoundingClientRect();
-        Celebrate.open({
-          origin: { x: r.left + r.width / 2, y: r.top + r.height / 2 }
+        requestAnimationFrame(() => {
+          const el = card || pop;
+          if (!el) return;
+          const r = el.getBoundingClientRect();
+          Celebrate.open({
+            origin: { x: r.left + r.width / 2, y: r.top + r.height / 2 }
+          });
         });
       }
     });
@@ -732,24 +750,18 @@
     if (hint) hint.classList.add('is-gone');
   }
 
-  function setExplained(sceneIdx, sceneEl) {
-    gate[sceneIdx].explained = true;
-    const right = $('.jny-right', sceneEl);
-    if (right) right.innerHTML = rightPanel(sceneIdx, true);
-  }
-
   function mountScene(sceneIdx) {
     const el = document.getElementById('scene-' + sceneIdx);
     if (!el) return;
     const step = sceneIdx === 6 ? 3 : sceneIdx - 3;
     const purchaseOn = sceneIdx === 6 && store.purchased;
     $('.jny-left', el).innerHTML = leftRail(purchaseOn ? 4 : step);
-    $('.jny-right', el).innerHTML = rightPanel(sceneIdx, gate[sceneIdx].explained);
+    $('.jny-right', el).innerHTML = rightPanel(sceneIdx);
     const screen = $('.ipad-screen', el);
     const chrome = $('.ipad-chrome', el);
 
     if (sceneIdx === 3) {
-      chrome.innerHTML = browserBar('timesofindia.example/business/acceline-digital-chatgpt-advertising');
+      chrome.innerHTML = browserBar('timesofindia.example/business/acceline-digital-chatgpt-advertising', null, STAMP_TOI);
       screen.innerHTML = toiHTML();
       const ad = $('[data-display-ad]', screen);
       const markSeen = () => { gate[3].done = true; fadeHint(el); };
@@ -765,7 +777,7 @@
     }
 
     if (sceneIdx === 4) {
-      chrome.innerHTML = browserBar('instagram.com');
+      chrome.innerHTML = browserBar('instagram.com', null, STAMP_IG);
       screen.innerHTML = igHTML();
       const feed = $('.ig-feed', screen);
       if (feed && store.igScroll) feed.scrollTop = store.igScroll;
@@ -777,7 +789,7 @@
         chrome.innerHTML = browserBar('stridewear.com', [
           { id: 'ig', label: 'instagram.com' },
           { id: 'sw', label: 'stridewear.com', on: true }
-        ]);
+        ], STAMP_IG);
         screen.innerHTML = productHTML('browse');
         bindProduct(screen, { allowPurchase: false });
         bindScroll(screen);
@@ -787,13 +799,13 @@
     }
 
     if (sceneIdx === 5) {
-      chrome.innerHTML = browserBar('tiktok.com');
+      chrome.innerHTML = browserBar('tiktok.com', null, STAMP_NIGHT);
       screen.innerHTML = ttHTML();
       bindTikTokFeed(screen);
       const open = ev => {
         if (ev && ev.target.closest('[data-tt-like],[data-tt-save],.ttx-act,.ttx-follow,.ttx-search,.ttx-arrow,[data-tt-prev],[data-tt-next]')) return;
         fadeHint(el);
-        chrome.innerHTML = browserBar('stridewear.com');
+        chrome.innerHTML = browserBar('stridewear.com', null, STAMP_NIGHT);
         screen.innerHTML = productHTML('browse', { offer: true });
         bindProduct(screen, {
           allowPurchase: false,
@@ -813,7 +825,7 @@
               { id: 'sw', label: 'stridewear.com', on: active === 'sw' }
             ]
           : [{ id: 'yt', label: 'youtube.com', on: true }];
-        chrome.innerHTML = browserBar(active === 'sw' ? 'stridewear.com' : 'youtube.com', tabs);
+        chrome.innerHTML = browserBar(active === 'sw' ? 'stridewear.com' : 'youtube.com', tabs, STAMP_NIGHT);
         $('[data-newtab]', chrome)?.addEventListener('click', openShop);
         $('[data-tab="yt"]', chrome)?.addEventListener('click', showYouTube);
         $('[data-tab="sw"]', chrome)?.addEventListener('click', openShop);
@@ -1070,7 +1082,7 @@
       store.igScroll = 0;
       store.ttScroll = 0;
       store.ttIndex = 0;
-      Object.values(gate).forEach(g => { g.done = false; g.explained = false; });
+      Object.values(gate).forEach(g => { g.done = false; });
     },
     play(sceneIdx) {
       if (sceneIdx === 3) {
@@ -1084,27 +1096,11 @@
         store.igScroll = 0;
         store.ttScroll = 0;
         store.ttIndex = 0;
-        Object.values(gate).forEach(g => { g.done = false; g.explained = false; });
+        Object.values(gate).forEach(g => { g.done = false; });
       }
       mountScene(sceneIdx);
     },
-    next(sceneIdx) {
-      const g = gate[sceneIdx];
-      if (!g) return 'pass';
-      if (!g.explained) {
-        if (sceneIdx === 3) {
-          g.done = true;
-          setExplained(sceneIdx, document.getElementById('scene-' + sceneIdx));
-          return 'held';
-        }
-        if (!g.done) {
-          const hint = $('[data-hint]', document.getElementById('scene-' + sceneIdx));
-          if (hint) { hint.classList.remove('is-gone'); hint.classList.add('is-pulse'); }
-          return 'held';
-        }
-        setExplained(sceneIdx, document.getElementById('scene-' + sceneIdx));
-        return 'held';
-      }
+    next() {
       return 'pass';
     }
   };
