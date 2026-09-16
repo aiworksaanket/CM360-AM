@@ -9,7 +9,7 @@
     'backipadfinal.png',
     'newbackforslide8.png',
     'attributionback.jpg',
-    'thankpage.jpg',
+    'thankfinal.png',
     'assets/stridewear-hero.jpg',
     'assets/stridewear-product.png',
     'assets/stridewear-ads.jpg',
