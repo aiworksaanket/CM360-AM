@@ -1469,7 +1469,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
         <p class="s8-brand reveal" id="s8-brand">CM360 Attribution Models</p>
         <p class="s8-eye reveal" id="s8-eye">Same journey. Different answers.</p>
         <i class="s8-rule reveal" id="s8-rule" aria-hidden="true"></i>
-        <p class="s8-num reveal" id="s8-num">09 / 17</p>
+        <p class="s8-num reveal" id="s8-num">09 / 16</p>
         <h1 class="s8-title reveal" id="s8-title">First Interaction</h1>
         <p class="s8-sub reveal" id="s8-sub">Gives all conversion credit to the first eligible interaction.</p>
         <div class="s8-cards">
@@ -1606,7 +1606,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
         <p class="s14-brand reveal" id="s14-brand">CM360 Attribution Models</p>
         <p class="s14-eye reveal" id="s14-eye">Same journey. Different answers.</p>
         <i class="s14-rule reveal" id="s14-rule" aria-hidden="true"></i>
-        <p class="s14-num reveal" id="s14-num">15 / 17</p>
+        <p class="s14-num reveal" id="s14-num">15 / 16</p>
         <h1 class="s14-title reveal" id="s14-title">How each model assigns credit</h1>
         <div class="s14-matrix" id="s14-matrix">
           <div class="s14-grid s14-head reveal" id="s14-head">
@@ -1723,7 +1723,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
       </div>
     </section>
 
-    <section class="scene s15-scene" id="scene-15" aria-label="Key takeaway">
+    <section class="s15-scene" id="scene-15" aria-label="Key takeaway" hidden>
       <img class="s15-bg" src="attributionback.jpg" alt="" decoding="async" aria-hidden="true">
       <div id="s15-pack" class="s15-pack">
         <p class="s15-brand reveal" id="s15-brand">CM360 Attribution Models</p>
@@ -1807,7 +1807,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
       <img class="s16-bg" src="thankfinal.png" alt="" decoding="async" aria-hidden="true">
       <div id="s16-pack" class="s16-pack">
         <p class="s16-brand reveal" id="s16-brand">CM360 Attribution Models</p>
-        <p class="s16-num reveal" id="s16-num">17 / 17</p>
+        <p class="s16-num reveal" id="s16-num">16 / 16</p>
         <h1 class="s16-title reveal" id="s16-title">Thank You<span>!</span></h1>
       </div>
     </section>
@@ -1815,7 +1815,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
 
   <nav id="navbar" aria-label="Presentation">
     <div id="progress" aria-hidden="true"><i id="progressFill"></i></div>
-    <div id="counter">01 / 17</div>
+    <div id="counter">01 / 16</div>
     <div class="nav-right">
       <p id="media-warm" hidden>Saving media…</p>
       <button class="nav-btn ghost" id="presentBtn" type="button" aria-pressed="false">Present</button>
@@ -2174,7 +2174,7 @@ function renderModelScene(el){
   const n = Number(String(el.id).replace(/\D/g,'')) + 1;
   pack.querySelector('.s8-title').textContent = model.name;
   pack.querySelector('.s8-sub').textContent = modelSub(model);
-  pack.querySelector('.s8-num').textContent = String(n).padStart(2,'0') + ' / 17';
+  pack.querySelector('.s8-num').textContent = String(n).padStart(2,'0') + ' / 16';
   pack.querySelector('.s8-note h3').textContent = model.question;
   pack.querySelector('.s8-note p').textContent = model.desc;
   pack.querySelectorAll('.s8-tag').forEach(t=>t.remove());
@@ -2322,7 +2322,7 @@ const playFns = {
   0:playScene0,1:playScene1,2:playScene2,3:playScene3,4:playScene4,5:playScene5,6:playScene6,
   7:playScene7,8:playScene8,9:el=>playModelScene(el),10:el=>playModelScene(el),
   11:el=>playModelScene(el),12:el=>playModelScene(el),13:el=>playModelScene(el),
-  14:playScene14,15:playScene15,16:playScene16
+  14:playScene14,15:playScene16
 };
 
 const SLIDE_KEY = 'cm360-slide';
@@ -2406,8 +2406,7 @@ function updateNav(){
   else if(current===7) fitScene7();
   else if(current>=8 && current<=13) fitScene8(sceneEls[current]);
   else if(current===14) fitScene14();
-  else if(current===15) fitScene15();
-  else if(current===16) fitScene16();
+  else if(current===15) fitScene16();
   else fitTitleNav();
 }
 
@@ -2419,8 +2418,7 @@ function fitActive(){
   else if(current===7) fitScene7();
   else if(current>=8 && current<=13) fitScene8(sceneEls[current]);
   else if(current===14) fitScene14();
-  else if(current===15) fitScene15();
-  else if(current===16) fitScene16();
+  else if(current===15) fitScene16();
   else fitTitleNav();
 }
 
