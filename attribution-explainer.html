@@ -74,11 +74,11 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
   background:var(--bg);color:var(--ink);
   transform:none;
   transition:opacity var(--t-slide) cubic-bezier(.4,0,.2,1),visibility 0s linear var(--t-slide);}
-.scene.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s;z-index:2;}
-.scene.is-prep{transition:none !important;visibility:visible;opacity:0;}
 .scene.is-from-next,.scene.is-from-prev{transform:none;}
 .scene.is-leave-next,.scene.is-leave-prev{visibility:visible;pointer-events:none;z-index:1;opacity:0;transform:none;}
-.deck-brand,.s0-brand,.s1-brand,.s2-brand,.s7-brand,.s8-brand,.s14-brand,.s15-brand,.s16-brand{
+.scene.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s;z-index:2;}
+.scene.is-prep{transition:none !important;visibility:visible;opacity:0;}
+.deck-brand,.s0-brand,.s1-brand,.s2-brand,.why-brand,.s7-brand,.s8-brand,.s14-brand,.s15-brand,.s16-brand{
   position:absolute;left:72px;top:46px;z-index:3;margin:0;
   font-size:13px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
   color:#5b6b82;white-space:nowrap;pointer-events:none;
@@ -200,6 +200,28 @@ html.theme-dark #scene-1{background:#f7f9fc;}
 #scene-2 .s2-bg.reveal{transform:none;transition:opacity .65s var(--ease);}
 #scene-2 .s2-bg.reveal.is-on{opacity:1;transform:none;}
 html.theme-dark #scene-2{background:#f7f9fc;}
+
+#scene-why{padding:0;align-items:center;justify-content:center;overflow:hidden;background:#f7f9fc;}
+#why-pack{--why-scale:min(calc(100cqw / 1920px), calc(100cqh / 1080px));--why-ink:#10182b;--why-blue:#155eef;--why-meta:#60708a;--why-sub:#52627a;--why-line:#dce3ec;width:1920px;height:1080px;flex-shrink:0;position:absolute;left:50%;top:50%;z-index:1;overflow:hidden;transform:translate(-50%,-50%) scale(var(--why-scale));transform-origin:center center;font-family:Inter,var(--font-display),system-ui,sans-serif;color:var(--why-ink);background:transparent;}
+.why-bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:fill;object-position:center;pointer-events:none;user-select:none;}
+.why-title{position:absolute;left:140px;top:148px;z-index:2;margin:0;width:1640px;font-size:58px;font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--why-ink);text-align:left;}
+.why-title em{font-style:normal;color:var(--why-blue);}
+.why-grid{position:absolute;left:140px;top:280px;z-index:2;width:1640px;height:640px;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;}
+.why-cell{position:relative;display:flex;flex-direction:column;justify-content:flex-start;padding:18px 48px 16px 8px;min-width:0;cursor:default;}
+#scene-why .why-cell.reveal{transition:opacity .35s var(--ease),transform .55s var(--ease);}
+#scene-why .why-grid:has(.why-cell:hover) .why-cell.reveal.is-on:not(:hover){opacity:.34;}
+#scene-why .why-cell.reveal.is-on:hover{z-index:3;opacity:1;}
+.why-cell:nth-child(3n+1),.why-cell:nth-child(3n+2){border-right:1px solid var(--why-line);}
+.why-cell:nth-child(3n+2),.why-cell:nth-child(3n){padding-left:56px;}
+.why-cell:nth-child(n+4){border-top:1px solid var(--why-line);padding-top:44px;}
+.why-num{display:block;margin:0 0 10px;font-size:32px;font-weight:500;letter-spacing:.04em;color:var(--why-meta);}
+.why-name{margin:0 0 14px;font-size:36px;font-weight:800;letter-spacing:-.03em;color:var(--why-ink);line-height:1.12;text-wrap:balance;}
+.why-desc{margin:0;max-width:36ch;font-size:26px;font-weight:500;line-height:1.32;color:var(--why-sub);}
+#scene-why .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
+#scene-why .reveal.is-on{opacity:1;transform:none;}
+#scene-why .why-bg.reveal{transform:none;transition:opacity .65s var(--ease);}
+#scene-why .why-bg.reveal.is-on{opacity:1;transform:none;}
+html.theme-dark #scene-why{background:#f7f9fc;}
 
 .story-head{width:min(1100px,92vw);display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
 .when{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;}
@@ -730,7 +752,7 @@ html.theme-dark .s15-scene{background:#eef5ff;}
 .s16-pack{--s16-scale:min(calc(100cqw / 1920px), calc(100cqh / 1080px));width:1920px;height:1080px;flex-shrink:0;position:absolute;left:50%;top:50%;z-index:1;overflow:hidden;transform:translate(-50%,-50%) scale(var(--s16-scale));transform-origin:center center;font-family:Inter,var(--font-display),system-ui,sans-serif;color:#10182b;background:transparent;}
 .s16-bg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:fill;object-position:center center;pointer-events:none;user-select:none;}
 .s16-num{position:absolute;right:72px;top:46px;z-index:3;margin:0;font-size:15px;font-weight:600;letter-spacing:.14em;color:#5b6b82;}
-.s16-title{position:absolute;left:100px;top:438px;z-index:3;margin:0;padding:0;font-size:118px;font-weight:800;letter-spacing:-.04em;line-height:1;color:#05070a;text-align:left;white-space:nowrap;}
+.s16-title{position:absolute;left:36px;top:438px;z-index:3;margin:0;padding:0;font-size:118px;font-weight:800;letter-spacing:-.04em;line-height:1;color:#05070a;text-align:left;white-space:nowrap;}
 .s16-title span{color:#155eef;}
 .s16-scene .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
 .s16-scene .reveal.is-on{opacity:1;transform:none;}
@@ -1294,6 +1316,46 @@ html.theme-dark .s16-scene{background:#eef5ff;}
       </div>
     </section>
 
+    <section class="scene" id="scene-why" aria-label="Why different attribution models">
+      <img class="why-bg reveal" id="why-bg" src="backslide3.png" alt="" decoding="async" fetchpriority="high" aria-hidden="true">
+      <div id="why-pack">
+        <p class="why-brand reveal" id="why-brand">CM360 Attribution Models</p>
+        <h1 class="why-title reveal" id="why-title">Why do we need <em>different attribution models?</em></h1>
+        <div class="why-grid" id="why-grid">
+          <article class="why-cell reveal" id="why-c1">
+            <span class="why-num">01</span>
+            <h3 class="why-name">Make better optimization decisions</h3>
+            <p class="why-desc">Use the insights to improve future campaigns.</p>
+          </article>
+          <article class="why-cell reveal" id="why-c2">
+            <span class="why-num">02</span>
+            <h3 class="why-name">Measure marketing impact</h3>
+            <p class="why-desc">See what marketing activity contributed to the conversion.</p>
+          </article>
+          <article class="why-cell reveal" id="why-c3">
+            <span class="why-num">03</span>
+            <h3 class="why-name">Compare channel contribution</h3>
+            <p class="why-desc">See how different channels contributed to the conversion.</p>
+          </article>
+          <article class="why-cell reveal" id="why-c4">
+            <span class="why-num">04</span>
+            <h3 class="why-name">One rule cannot show every perspective</h3>
+            <p class="why-desc">Giving all credit to one touchpoint can tell only part of the journey.</p>
+          </article>
+          <article class="why-cell reveal" id="why-c5">
+            <span class="why-num">05</span>
+            <h3 class="why-name">Customers take different paths</h3>
+            <p class="why-desc">A conversion can happen after different combinations of touchpoints.</p>
+          </article>
+          <article class="why-cell reveal" id="why-c6">
+            <span class="why-num">06</span>
+            <h3 class="why-name">Different models answer different questions</h3>
+            <p class="why-desc">One model may focus on the first touch, another on the last, or share credit across touchpoints.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="scene journey-scene" id="scene-3" aria-label="Display impression">
       <div class="jny-pack">
         <img class="jny-bg" src="backipadfinal.png" alt="" decoding="async" aria-hidden="true">
@@ -1469,7 +1531,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
         <p class="s8-brand reveal" id="s8-brand">CM360 Attribution Models</p>
         <p class="s8-eye reveal" id="s8-eye">Same journey. Different answers.</p>
         <i class="s8-rule reveal" id="s8-rule" aria-hidden="true"></i>
-        <p class="s8-num reveal" id="s8-num">09 / 16</p>
+        <p class="s8-num reveal" id="s8-num">10 / 17</p>
         <h1 class="s8-title reveal" id="s8-title">First Interaction</h1>
         <p class="s8-sub reveal" id="s8-sub">Gives all conversion credit to the first eligible interaction.</p>
         <div class="s8-cards">
@@ -1606,7 +1668,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
         <p class="s14-brand reveal" id="s14-brand">CM360 Attribution Models</p>
         <p class="s14-eye reveal" id="s14-eye">Same journey. Different answers.</p>
         <i class="s14-rule reveal" id="s14-rule" aria-hidden="true"></i>
-        <p class="s14-num reveal" id="s14-num">15 / 16</p>
+        <p class="s14-num reveal" id="s14-num">16 / 17</p>
         <h1 class="s14-title reveal" id="s14-title">How each model assigns credit</h1>
         <div class="s14-matrix" id="s14-matrix">
           <div class="s14-grid s14-head reveal" id="s14-head">
@@ -1807,7 +1869,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
       <img class="s16-bg" src="thankfinal.png" alt="" decoding="async" aria-hidden="true">
       <div id="s16-pack" class="s16-pack">
         <p class="s16-brand reveal" id="s16-brand">CM360 Attribution Models</p>
-        <p class="s16-num reveal" id="s16-num">16 / 16</p>
+        <p class="s16-num reveal" id="s16-num">17 / 17</p>
         <h1 class="s16-title reveal" id="s16-title">Thank You<span>!</span></h1>
       </div>
     </section>
@@ -1815,7 +1877,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
 
   <nav id="navbar" aria-label="Presentation">
     <div id="progress" aria-hidden="true"><i id="progressFill"></i></div>
-    <div id="counter">01 / 16</div>
+    <div id="counter">01 / 17</div>
     <div class="nav-right">
       <p id="media-warm" hidden>Saving media…</p>
       <button class="nav-btn ghost" id="presentBtn" type="button" aria-pressed="false">Present</button>
@@ -2067,6 +2129,20 @@ function playScene2(){
   requestAnimationFrame(fitScene2);
 }
 
+function fitSceneWhy(){
+  setPackScale(document.getElementById('why-pack'), '--why-scale', containScale());
+}
+
+function playSceneWhy(){
+  ['why-bg','why-brand','why-title','why-c1','why-c2','why-c3','why-c4','why-c5','why-c6'].forEach(id=>off(document.getElementById(id)));
+  fitSceneWhy();
+  at(40, ()=>on(document.getElementById('why-bg')));
+  at(140, ()=>on(document.getElementById('why-brand')));
+  at(260, ()=>on(document.getElementById('why-title')));
+  [1,2,3,4,5,6].forEach((n,i)=> at(360+i*80, ()=>on(document.getElementById('why-c'+n))));
+  requestAnimationFrame(fitSceneWhy);
+}
+
 function resetStory(ids){
   ids.forEach(id=>{
     const el=document.getElementById(id);
@@ -2171,10 +2247,10 @@ function renderModelScene(el){
     pack.querySelectorAll('[stroke="url(#'+old+')"]').forEach(node=>node.setAttribute('stroke','url(#'+neu+')'));
     pack.querySelectorAll('[fill="url(#'+old+')"]').forEach(node=>node.setAttribute('fill','url(#'+neu+')'));
   });
-  const n = Number(String(el.id).replace(/\D/g,'')) + 1;
+  const n = sceneEls.indexOf(el) + 1;
   pack.querySelector('.s8-title').textContent = model.name;
   pack.querySelector('.s8-sub').textContent = modelSub(model);
-  pack.querySelector('.s8-num').textContent = String(n).padStart(2,'0') + ' / 16';
+  pack.querySelector('.s8-num').textContent = String(n).padStart(2,'0') + ' / 17';
   pack.querySelector('.s8-note h3').textContent = model.question;
   pack.querySelector('.s8-note p').textContent = model.desc;
   pack.querySelectorAll('.s8-tag').forEach(t=>t.remove());
@@ -2319,10 +2395,10 @@ function fitScene16(){
 const sceneEls = [...document.querySelectorAll('.scene')];
 document.querySelectorAll('.scene[data-model]').forEach(renderModelScene);
 const playFns = {
-  0:playScene0,1:playScene1,2:playScene2,3:playScene3,4:playScene4,5:playScene5,6:playScene6,
-  7:playScene7,8:playScene8,9:el=>playModelScene(el),10:el=>playModelScene(el),
-  11:el=>playModelScene(el),12:el=>playModelScene(el),13:el=>playModelScene(el),
-  14:playScene14,15:playScene16
+  0:playScene0,1:playScene1,2:playScene2,3:playSceneWhy,4:playScene3,5:playScene4,6:playScene5,7:playScene6,
+  8:playScene7,9:playScene8,10:el=>playModelScene(el),11:el=>playModelScene(el),
+  12:el=>playModelScene(el),13:el=>playModelScene(el),14:el=>playModelScene(el),
+  15:playScene14,16:playScene16
 };
 
 const SLIDE_KEY = 'cm360-slide';
@@ -2366,27 +2442,35 @@ function goTo(idx){
     resetReveals(s);
   });
 
+  el.classList.remove('is-leave-next','is-leave-prev','is-from-next','is-from-prev','is-prep');
+
   if(!reduce){
     el.classList.add('is-prep', forward ? 'is-from-next' : 'is-from-prev');
     void el.offsetWidth;
   }
 
-  prev.classList.remove('is-active');
+  prev.classList.remove('is-active','is-prep','is-from-next','is-from-prev');
   prev.setAttribute('aria-hidden','true');
-  if(!reduce) prev.classList.add(forward ? 'is-leave-next' : 'is-leave-prev');
+  if(!reduce && prev!==el){
+    prev.classList.remove('is-leave-next','is-leave-prev');
+    prev.classList.add(forward ? 'is-leave-next' : 'is-leave-prev');
+  }
 
   current = idx;
   persistSlide(current);
   el.classList.add('is-active');
-  el.classList.remove('is-prep','is-from-next','is-from-prev');
+  el.classList.remove('is-prep','is-from-next','is-from-prev','is-leave-next','is-leave-prev');
   el.removeAttribute('aria-hidden');
   const fn = playFns[current];
   if(fn) fn(el);
   updateNav();
 
+  const leaving = prev;
   const cleanup = ()=>{
-    prev.classList.remove('is-leave-next','is-leave-prev');
-    resetReveals(prev);
+    if(leaving !== sceneEls[current]){
+      leaving.classList.remove('is-leave-next','is-leave-prev');
+      resetReveals(leaving);
+    }
     leaveTimer = 0;
   };
   if(reduce) cleanup();
@@ -2394,7 +2478,7 @@ function goTo(idx){
 }
 
 function updateNav(){
-  document.documentElement.classList.toggle('on-title', current===0 || current===1 || current===2);
+  document.documentElement.classList.toggle('on-title', current<=3);
   document.getElementById('counter').textContent = String(current+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
   document.getElementById('progressFill').style.width = ((current+1)/total*100)+'%';
   document.getElementById('prevBtn').disabled = current===0;
@@ -2402,11 +2486,12 @@ function updateNav(){
   if(current===0) fitScene0();
   else if(current===1) fitScene1();
   else if(current===2) fitScene2();
-  else if(current>=3 && current<=6) fitJourney();
-  else if(current===7) fitScene7();
-  else if(current>=8 && current<=13) fitScene8(sceneEls[current]);
-  else if(current===14) fitScene14();
-  else if(current===15) fitScene16();
+  else if(current===3) fitSceneWhy();
+  else if(current>=4 && current<=7) fitJourney();
+  else if(current===8) fitScene7();
+  else if(current>=9 && current<=14) fitScene8(sceneEls[current]);
+  else if(current===15) fitScene14();
+  else if(current===16) fitScene16();
   else fitTitleNav();
 }
 
@@ -2414,16 +2499,17 @@ function fitActive(){
   if(current===0) fitScene0();
   else if(current===1) fitScene1();
   else if(current===2) fitScene2();
-  else if(current>=3 && current<=6) fitJourney();
-  else if(current===7) fitScene7();
-  else if(current>=8 && current<=13) fitScene8(sceneEls[current]);
-  else if(current===14) fitScene14();
-  else if(current===15) fitScene16();
+  else if(current===3) fitSceneWhy();
+  else if(current>=4 && current<=7) fitJourney();
+  else if(current===8) fitScene7();
+  else if(current>=9 && current<=14) fitScene8(sceneEls[current]);
+  else if(current===15) fitScene14();
+  else if(current===16) fitScene16();
   else fitTitleNav();
 }
 
 function requestNext(){
-  if(current>=3 && current<=6 && window.Journey && Journey.next(current)==='held') return;
+  if(current>=4 && current<=7 && window.Journey && Journey.next(current-1)==='held') return;
   goTo(current+1);
 }
 document.getElementById('nextBtn').addEventListener('click', requestNext);
