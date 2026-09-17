@@ -83,6 +83,10 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
   font-size:13px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
   color:#5b6b82;white-space:nowrap;pointer-events:none;
 }
+#s0-brand{
+  text-transform:none;
+  letter-spacing:.08em;
+}
 .eyebrow{margin:0 0 14px;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;}
 .display-title{margin:0;font-family:var(--font-display);font-weight:650;font-size:clamp(44px,5.4vw,72px);
   line-height:1.05;letter-spacing:-.03em;text-wrap:balance;text-align:center;}
@@ -1162,7 +1166,7 @@ html.theme-dark .s16-scene{background:#eef5ff;}
     <section class="scene" id="scene-0" aria-label="Introduction">
       <div id="s0-pack">
         <img class="s0-bg reveal" id="s0-bg" src="slide2back.png" alt="" decoding="async" fetchpriority="high" aria-hidden="true">
-        <p class="s0-brand reveal" id="s0-brand">CM360 Attribution Models</p>
+        <p class="s0-brand reveal" id="s0-brand">Created by: Sanket Bhosale</p>
         <h1 class="s0-title reveal" id="s0-title">
           <span>Attribution</span>
           <span>Models in <em>CM360</em></span>
@@ -1890,6 +1894,10 @@ html.theme-dark .s16-scene{background:#eef5ff;}
   </div>
 </div>
 
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <script type="module" src="glow-cursor.js"></script>
 <script src="celebration.js"></script>
 <script src="journey.js"></script>
